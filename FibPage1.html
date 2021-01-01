@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Website</title>
+    <!-- AJAX -->
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body 
+        {
+            background-color: rgb(12, 12, 12);
+            color: white;
+
+        }
+        h1
+        {
+            font-size: 75px;   
+            text-shadow: 3px 3px #887c7c;         
+        }
+        h2 
+        {
+            margin-bottom: 1.5rem;
+        }
+        .buttons 
+        {
+            margin-top: 15px;
+            width: 250px;
+        }
+        input
+        {
+            display: inline-block;
+            width: 5%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: white;
+            background-color: transparent;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            margin-left:1.5rem;
+
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var count = 1;
+            function fib() {
+                // Some variables here
+                var prev_a = 0;
+                var prev_b = 1;
+                function nacci() {
+                    
+                    var current = prev_a + prev_b;
+                    prev_a = prev_b;
+                    prev_b = current;
+                    // console.log(current);
+                    return current;
+                
+                }
+                return nacci
+            }
+            var fibCounter = fib();
+            $('#white-btn').click(function(){
+                count += 1;
+                var val = fibCounter();
+                $('#seq-number').html(val);
+                $('#count-number').html(count);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <br>
+        <center> 
+            <h1>Fibonacci Sequence</h1> 
+            <h2>Sequence Number <span id = "count-number">1</span></h2>
+            <h2 id="seq-number">1</h2>
+                <button id="white-btn" type="button" class="btn btn-light">Next</button>
+            
+        </center>
+    </div>
+</body>
+</html>

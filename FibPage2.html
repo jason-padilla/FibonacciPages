@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Website</title>
+    <!-- AJAX -->
+    <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body 
+        {
+            background-color: rgb(12, 12, 12);
+            color: white;
+
+        }
+        h1
+        {
+            font-size: 75px;   
+            text-shadow: 3px 3px #887c7c;         
+        }
+        .buttons 
+        {
+            margin-top: 15px;
+            width: 250px;
+        }
+        #before-btn 
+        {
+            margin-right: 3rem;
+        }
+        #next-btn 
+        {
+            margin-left: 3rem;
+        }
+        h2
+        {
+            display: inline-block;
+        }
+        input
+        {
+            display: inline-block;
+            width: 7%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: white;
+            background-color: transparent;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            margin-left:1.5rem;
+        }
+    </style>
+    <script>
+        $(document).ready(function(number){
+            
+            
+            function fibo(number) {
+                var sequence = [1,1];
+                if(number == 1 || number == 2)
+                    return 1;
+                else {
+                    var number = number - 1;
+                    for(var num = 1; num < number; num++) {
+                        var next = sequence[num] + sequence[num-1]; 
+                        sequence.push(next);
+                    }
+                    return sequence[number];
+                }
+            };
+            //We want to keep track of seq_num as global so form, before-btn, and after-btn can modify it.
+            var sequence_number = 1; 
+            
+            $('form').submit(function(){
+                var entered_number = $("input[name='number']").val();
+                sequence_number = entered_number;
+                //Modifies the value inside the input that shows the current sequence
+                $("input[name='number']").val(sequence_number); 
+                $('#result').text(fibo(sequence_number));
+                return false;
+            });
+
+            $('#before-btn').click(function(){
+                //Make sure sequence is bigger than 1 so that it wont hit 0
+                if (sequence_number > 1) {
+                    sequence_number -= 1;
+                    //Modifies the value inside the input that shows the current sequence
+                    $("input[name='number']").val(sequence_number);
+                    $('#result').text(fibo(sequence_number));
+                }
+            });
+
+            $('#next-btn').click(function(){
+                sequence_number += 1;
+                //Modifies the value inside the input that shows the current sequence
+                $("input[name='number']").val(sequence_number);
+                $('#result').text(fibo(sequence_number));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <br>
+        <center> 
+            <h1>Fibonacci Sequence</h1> 
+            <form >
+                <h2>Sequence Number</h2>
+                <input id='number-input' type="number" name="number" min="1" value = "1">
+            </form>
+            <h2 id="result">1</h2>
+            <div class = "buttons">
+                <button id="before-btn" type="button" class="btn btn-dark">Before</button>
+                <button id="next-btn" type="button" class="btn btn-light">Next</button>
+            </div>
+        </center>
+    </div>
+</body>
+</html>
